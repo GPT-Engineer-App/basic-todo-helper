@@ -24,13 +24,13 @@ const Index = () => {
       <Heading mb="8">Todo App</Heading>
       <Box>
         <Input placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)} onKeyPress={(e) => e.key === "Enter" && handleAddTodo()} />
-        <IconButton icon={<FaPlus />} ml={2} colorScheme="blue" onClick={handleAddTodo} aria-label="Add todo" />
+        <IconButton icon={<FaPlus />} ml={2} colorScheme="yellow" onClick={handleAddTodo} aria-label="Add todo" />
       </Box>
       <List spacing={3} mt={4} w="100%">
         {todos.map((todo, index) => (
           <ListItem key={index} display="flex" justifyContent="space-between" alignItems="center">
             {todo}
-            <IconButton icon={<FaTrash />} colorScheme="red" onClick={() => handleDeleteTodo(index)} aria-label="Delete todo" />
+            <IconButton icon={<FaTrash />} colorScheme="yellow" onClick={() => handleDeleteTodo(index)} aria-label="Delete todo" />
           </ListItem>
         ))}
       </List>

@@ -31,16 +31,20 @@ const Index = () => {
         <Input placeholder="Deadline (YYYY-MM-DD)" value={deadline} onChange={(e) => setDeadline(e.target.value)} size="sm" width="auto" ml={2} />
         <IconButton icon={<FaPlus />} ml={2} colorScheme="yellow" onClick={handleAddTodo} aria-label="Add todo" />
       </Box>
-      <List spacing={3} mt={4} w="100%">
-        {todos.map(({ task, deadline }, index) => (
-          <ListItem key={index} display="flex" justifyContent="space-between" alignItems="center">
-            <Box>
-              {task} <span style={{ color: "gray", fontSize: "smaller" }}>Due: {deadline}</span>
-            </Box>
-            <IconButton icon={<FaTrash />} colorScheme="yellow" onClick={() => handleDeleteTodo(index)} aria-label="Delete todo" />
-          </ListItem>
+      <Box display="grid" gridTemplateColumns="repeat(7, 1fr)" gap={4}>
+        {Array.from({ length: 30 }).map((_, day) => (
+          <Box key={day} p={4} border="1px" borderColor="gray.200">
+            <Heading size="xs">{day + 1}</Heading>
+            {todos
+              .filter((todo) => new Date(todo.deadline).getDate() === day + 1)
+              .map(({ task, deadline }, index) => (
+                <Box key={index}>
+                  {task} <IconButton icon={<FaTrash />} size="xs" colorScheme="yellow" onClick={() => handleDeleteTodo(index)} aria-label="Delete todo" />
+                </Box>
+              ))}
+          </Box>
         ))}
-      </List>
+      </Box>
     </VStack>
   );
 };

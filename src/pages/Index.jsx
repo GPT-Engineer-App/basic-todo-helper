@@ -36,7 +36,11 @@ const Index = () => {
           <Box key={day} p={4} border="1px" borderColor="gray.200">
             <Heading size="xs">{day + 1}</Heading>
             {todos
-              .filter((todo) => new Date(todo.deadline).getDate() === day + 1)
+              .filter((todo) => {
+                const deadlineDate = new Date(todo.deadline);
+                const currentDate = new Date(2024, 3, day + 1);
+                return deadlineDate.getDate() === currentDate.getDate() && deadlineDate.getMonth() === currentDate.getMonth() && deadlineDate.getFullYear() === currentDate.getFullYear();
+              })
               .map(({ task, deadline }, index) => (
                 <Box key={index}>
                   {task} <IconButton icon={<FaTrash />} size="xs" colorScheme="yellow" onClick={() => handleDeleteTodo(index)} aria-label="Delete todo" />
